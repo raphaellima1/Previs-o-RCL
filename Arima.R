@@ -1,8 +1,8 @@
 library(dplyr)
-pacman::p_load(dplyr, ggplot2,readxl,forecast,xgboost,tidyr,xts,TSstudio )
+pacman::p_load(dplyr, ggplot2,readxl,forecast,xgboost,tidyr,xts,TSstudio, mFilter,BETS )
 
 
-df <- read_excel('//sefazarquivos/AEMFPF/DIVERSOS/Previs-o-RCL/RCL2015_a_2024.xlsx', sheet = 1) %>% 
+df <- read_excel('RCL2015_a_2024.xlsx', sheet = 1) %>% 
   drop_na(RCL_AJUST) %>% 
   select(Data, RCL_AJUST) 
   
@@ -13,6 +13,12 @@ df$date<-as.Date(df$date, format="%Y-%m-%d")
 RCLXTS<- xts(df[-1], df[[1]])
 RCLTS<- ts(df$rcl, start=c(2016,1),end=c(2024,5), frequency=12 )
 
+RCLHP <- hpfilter(RCLTS, freq = 14400) 
+
+rclhp <- RCLHP$trend |> 
+  as.data.frame()
+
+writexl::write_xlsx(rclhp, 'rfiltrohp.xlsx' )
 
 ts_plot(RCLXTS, title="RCL sem IPASGO")
 
