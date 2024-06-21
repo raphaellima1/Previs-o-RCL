@@ -11,7 +11,7 @@ df <- read_excel('RCL2015_a_2024.xlsx', sheet = 1) %>%
 colnames(df)<-c("date", "rcl")
 df$date<-as.Date(df$date, format="%Y-%m-%d")
 RCLXTS<- xts(df[-1], df[[1]])
-RCLTS<- ts(df$rcl, start=c(2016,1),end=c(2024,5), frequency=12 )
+RCLTS<- ts(df$rcl, start=c(2015,12),end=c(2024,5), frequency=12 )
 
 RCLHP <- hpfilter(RCLTS, freq = 14400) 
 
@@ -150,7 +150,7 @@ df <- as.data.frame(m_ets) %>%
   mutate(data = seq(from = as.Date("2024-06-01"), to = as.Date('2027-12-01'), by = "month"))
 
   
-writexl::write_xlsx(df, 'previsão.xlsx')
+writexl::write_xlsx(df, 'previsão1.xlsx')
 
 
 
