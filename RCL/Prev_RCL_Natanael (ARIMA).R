@@ -1,8 +1,4 @@
-# Script para previsão de receita da RCL do Estado de Goiás
-library(dplyr)
-library(lubridate)
-library(forecast)
-library(ggplot2)
+# Script para  <- <- <- 
 
 # df <- readxl::read_excel(file.choose()) %>% 
 #   dplyr::filter(ESPECIFICAÇÃO == "RECEITA CORRENTE LÍQUIDA (III) = (I-II)" | ...3 == "IPASGO") %>% 
